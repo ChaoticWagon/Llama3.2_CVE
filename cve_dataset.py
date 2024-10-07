@@ -82,8 +82,8 @@ def main():
                             if file.startswith(f"CVE-{year}-") and file.endswith(".json"):
                                 json_file = os.path.join(root, file)
                                 extract_json_data(json_file)
-                                human_input = f"Explain {cve_id}"
-                                analyst_response = f"{description}\nAffected Products: {affected_products}\nReferences: {references}\nCVE State: {cve_state}"
+                                analyst_response = f"{cve_id}"
+                                human_input = f"{description}\nAffected Products: {affected_products}\nReferences: {references}\nCVE State: {cve_state}"
                                 write_csv_entry("data.csv", human_input, analyst_response)
     convert_csv_to_jsonl("data.csv", "train.jsonl")
 

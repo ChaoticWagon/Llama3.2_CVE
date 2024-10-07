@@ -1,0 +1,15 @@
+# In config
+tokenizer:
+  _component_: torchtune.models.llama3.llama3_tokenizer
+  path: /Users/nathanbonano/.llama/checkpoints/Llama3.2-3B-Instruct/tokenizer.model
+
+
+dataset:
+  _component_: torchtune.datasets.chat_dataset
+  source: json
+  data_files: train.json
+  conversation_column: conversations
+  conversation_style: sharegpt
+  train_on_input: False
+  packed: False
+  split: train
