@@ -1,0 +1,73 @@
+# Config for running the InferenceRecipe in generate.py to generate output from an LLM
+#
+# To launch, run the following command from root torchtune directory:
+#    tune run generate --config generation
+
+# Model arguments
+model:
+  _component_: torchtune.models.llama3_2.qlora_llama3_2_3b
+  lora_attn_modules: ['q_proj', 'v_proj', 'output_proj']
+  apply_lora_to_mlp: True
+  apply_lora_to_output: False
+  lora_rank: 64
+  lora_alpha: 128
+  lora_dropout: 0.0
+
+# Tokenizer
+tokenizer:
+  _component_: torchtune.models.llama3.llama3_tokenizer
+  path: /home/nathan/.llama/checkpoints/Llama3.2-3B-Instruct/tokenizer.model
+
+checkpointer:
+  _component_: torchtune.training.FullModelHFCheckpointer
+  checkpoint_dir: /home/nathan/.cache/huggingface/hub/models--meta-llama--Llama-3.2-3B-Instruct/snapshots/392a143b624368100f77a3eafaa4a2468ba50a72/Llama-Train/Llama-3.2-3B-Instruct/
+  checkpoint_files: [
+#    hf_model_0001_0.pt,
+#    hf_model_0001_1.pt,
+#    hf_model_0001_2.pt,
+#    hf_model_0001_3.pt,
+#    hf_model_0001_4.pt,
+#    hf_model_0001_5.pt,
+#    hf_model_0001_6.pt,
+#    hf_model_0001_7.pt,
+#    hf_model_0001_8.pt,
+#    hf_model_0001_9.pt,
+#    hf_model_0001_10.pt,
+#    hf_model_0001_11.pt,
+#    hf_model_0001_12.pt,
+#    hf_model_0001_13.pt,
+    hf_model_0001_0.pt,
+#    hf_model_0002_0.pt,
+#    hf_model_0002_1.pt,
+#    hf_model_0002_2.pt,
+#    hf_model_0002_3.pt,
+#    hf_model_0002_4.pt,
+#    hf_model_0002_5.pt,
+#    hf_model_0002_6.pt,
+#    hf_model_0002_7.pt,
+#    hf_model_0002_8.pt,
+#    hf_model_0002_9.pt,
+#    hf_model_0002_10.pt,
+#    hf_model_0002_11.pt,
+#    hf_model_0002_12.pt,
+#    hf_model_0002_13.pt,
+    hf_model_0002_0.pt,
+  ]
+  output_dir: /home/nathan/.cache/huggingface/hub/models--meta-llama--Llama-3.2-3B-Instruct/snapshots/392a143b624368100f77a3eafaa4a2468ba50a72/Llama-Train/Llama-3.2-3B-Instruct/
+  model_type: LLAMA3_2
+
+seed: 1234
+device: cuda
+dtype: bf16
+
+# Generation arguments; defaults taken from gpt-fast
+prompt: "TCP/IP implementations allows remote attackers to cause a denial of service (crash or hang) via crafted packets"
+instruct_template: null
+chat_format: null
+max_new_tokens: 300
+temperature: 0.6 # 0.8 and 0.6 are popular values to try
+top_k: 300
+
+enable_kv_cache: True
+
+quantizer: null
